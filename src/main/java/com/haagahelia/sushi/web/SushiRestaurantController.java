@@ -56,7 +56,7 @@ public class SushiRestaurantController {
 	}
 	
 	//displays home page
-	@RequestMapping("/home")
+	@RequestMapping("/")
 	public String Home() {
 		return "home";
 	}
