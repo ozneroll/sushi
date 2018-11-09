@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>About</title>
+	<link rel="stylesheet" href="../css/spectre.css">
+	<link rel="stylesheet" href="../css/spectre-icons.css">
+    <link rel="stylesheet" href="../css/style.css"> 
+    <!-- All links necessary from spectre css, including material icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+<body>
+
+    <div lang="en" th:replace="fragments/header :: header"> </div>
+    <div class="content">
+		<div class="picture">
+			<img alt="" src="../sushi.jpg" />
+			<div class="centeredUp" style="text-align: center;">
+			<span class="bigtext">About this website</span>
+			<p class="smalltext">This website is the result of a project made for the Server Programming course in Haaga Helia.</p>
+			<p class="smalltext">An API is also available and open for use. For more information, click below</p>
+			<p class="smalltext"><a class="btn btn-primary" href="./" target="_blank"><i class="icon icon-share"></i></a></p>		
+			</div>
+		</div>
+	</div>
+	<div lang="en" th:replace="fragments/footer :: footer"> </div>
+</body>
+</html>

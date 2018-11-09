@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" href="../css/spectre.css">
+	<link rel="stylesheet" href="../css/spectre-icons.css">
+    <link rel="stylesheet" href="../css/style.css"> 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+
+<body>
+
+    <div lang="en" th:replace="fragments/header :: header"> </div>
+    
+    <div class="content">
+    
+    <!-- Just for the admin, no need to welcome the basic user -->
+	<div sec:authorize="hasAuthority('ADMIN')" class="col-md-4">
+		<h3 th:inline="text">Welcome [[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	
+	<!-- Add button, admin only -->
+	<a style="float: right; width: 50px;" sec:authorize="hasAuthority('ADMIN')" href="/addrestaurant" class="btn btn-success"><i class="icon icon-plus"></i></a>
+	
+	<table class="table">
+	
+		<tr>
+			<th>Overall rating</th>
+			<th>Name</th>
+			<th>Price</th>
+			<th>Selection</th>
+			<th>Quality</th>
+			<th>City</th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th sec:authorize="hasAuthority('ADMIN')"></th>
+			<th></th>
+		</tr>
+		
+		<tr th:each = "restaurant : ${restaurants}">
+			
+			<!-- Display the number and one star -->
+			<td><span th:text="${restaurant.overallRating}"></span><span style="font-size: 14px" class='material-icons'>star_rate</span></td>
+			<td th:text="${restaurant.name}"></td>
+			<td th:text="${restaurant.price}"></td>
+			<td><span th:text="${restaurant.selection}"></span><span style="font-size: 14px" class='material-icons'>star_rate</span></td>
+			<td><span th:text="${restaurant.quality}"></span><span style="font-size: 14px" class='material-icons'>star_rate</span></td>
+			<td th:text="${restaurant.city}"></td>
+			
+			<!-- Link for details -->
+			<td style="width: 40px;"><a class="btn" th:href="@{/view/{id}(id=${restaurant.id})}">Details</a></td>
+			
+			<!-- Admin tools: edit/delete -->
+			<td style="width: 40px;" sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-primary" th:href="@{/edit/{id}(id=${restaurant.id})}"><i class="icon icon-edit"></a></td>
+			<td style="width: 40px;" sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-error" th:href="@{/delete/{id}(id=${restaurant.id})}"><i class="icon icon-delete"></i></a></td>
+			
+		</tr>
+	
+	</table>
+	
+	</div>
+	
+	<div lang="en" th:replace="fragments/footer :: footer"> </div>
+	
+</body>
+
+</html>

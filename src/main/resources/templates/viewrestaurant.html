@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"> 
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Restaurant</title>
+<link rel="stylesheet" href="../css/spectre.css">
+<link rel="stylesheet" href="../css/style.css"> 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+</head>
+
+<body>
+
+   	<div lang="en" th:replace="fragments/header :: header"></div>
+   	
+   	<div class="content">
+   	
+        <!-- Display the stars -->
+        <div class="stars" th:utext="${stars}"></div>
+        
+		<h1 th:text="${restaurant.name}">Name</h1>
+		<br>
+		
+		<h4>Description</h4>
+		<p th:text="${restaurant.description}"></p>
+		
+		<h4>Selection</h4>
+		<p th:utext="${starsSelection}"></p>
+		
+		<h4>Quality</h4>
+		<p th:utext="${starsQuality}"></p>
+		
+		<h4>Price</h4>
+		<p th:text="${restaurant.price + ' ' + 'euros'}"></p>
+		
+		<h4>Extra features</h4>
+		<p th:text="${restaurant.extraFeatures}"></p>
+		
+		<!-- TO WORK ON -->
+		<span id="latitude" style="display: none" th:text="${restaurant.latitude}"></span>
+		
+		<span id="longitude" style="display: none" th:text="${restaurant.longitude}"></span>
+		
+    	</div> 
+    	
+	<div lang="en" th:replace="fragments/footer :: footer"> </div>
+
+</body>
+
+</html>
