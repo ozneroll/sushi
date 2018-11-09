@@ -30,7 +30,7 @@ public class SushiRestaurantRepositoryTest {
     private SushiRestaurantRepository repository;
 
     @Test
-    public void findByTitleShouldReturnBook() {
+    public void findByTitleShouldReturnRestaurant() {
         List<SushiRestaurant> sushi = repository.findByName("Haru");
         
         assertThat(sushi).hasSize(1);
@@ -38,7 +38,7 @@ public class SushiRestaurantRepositoryTest {
     }
     
     @Test
-    public void createNewBook() {
+    public void createNewRestaurant() {
     	SushiRestaurant sushi = new SushiRestaurant("Makuja", "Weird place", "11", "41", 3, 12.90, 3, 3, "Drink fountain", new City("New York"));
     	repository.save(sushi);
     	assertThat(sushi.getId()).isNotNull();
