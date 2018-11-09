@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="../css/style.css"> 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
+
+<link rel='stylesheet' type='text/css' href='../sdk/map.css'/>
+<script src='../sdk/tomtom.min.js'></script>
+        
 </head>
 
 <body>
@@ -19,7 +23,7 @@
         <!-- Display the stars -->
         <div class="stars" th:utext="${stars}"></div>
         
-		<h1 th:text="${restaurant.name}">Name</h1>
+		<h1 id="name" th:text="${restaurant.name}">Name</h1>
 		<br>
 		
 		<h4>Description</h4>
@@ -37,10 +41,36 @@
 		<h4>Extra features</h4>
 		<p th:text="${restaurant.extraFeatures}"></p>
 		
-		<!-- TO WORK ON -->
-		<span id="latitude" style="display: none" th:text="${restaurant.latitude}"></span>
+		<span style="display: none" id="latitude" th:text="${restaurant.latitude}"></span>
 		
-		<span id="longitude" style="display: none" th:text="${restaurant.longitude}"></span>
+		<span style="display: none" id="longitude" th:text="${restaurant.longitude}"></span>
+		
+		<div id="map" style="height: 500px; width: 100%;"></div>
+		
+		<script type="text/javascript">
+		
+		var lat = document.getElementById('latitude').innerText;
+		var longi = document.getElementById('longitude').innerText;
+
+		 var restaurant = [lat, longi];
+		 
+		 var map = tomtom.L.map('map', {
+
+	            key: 'YFm7C5AZ3UAZhvopPdFsmkxCFQTHQZwY',
+
+	            basePath: '../sdk/',
+	            
+	            center: restaurant,
+	            
+	            zoom: 15
+
+	        });
+			 var marker = tomtom.L.marker(restaurant).addTo(map);
+		 
+		</script>
+		
+		
+		
 		
     	</div> 
     	
