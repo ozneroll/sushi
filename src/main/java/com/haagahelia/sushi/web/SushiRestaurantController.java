@@ -158,5 +158,4 @@ public class SushiRestaurantController {
 		return "viewrestaurant";
 	}
 	
-	
 }

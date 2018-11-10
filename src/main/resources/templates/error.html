@@ -1,33 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>Error</title>
 	<link rel="stylesheet" href="../css/spectre.css">
 	<link rel="stylesheet" href="../css/spectre-icons.css">
     <link rel="stylesheet" href="../css/style.css"> 
+    <!-- All links necessary from spectre css, including material icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 </head>
 <body>
 
     <div lang="en" th:replace="fragments/header :: header"> </div>
-    
     <div class="content">
 		<div class="picture">
-			
-			<img alt="" src="../sushi_making.jpg" />
-			
-			<div class="centeredUp">
-				<span class="bigtext">THE ART OF SUSHI</span>
-				<p class="smalltext">The fine art of preparing sushi is something that you watch and learn</p>
-				<p class="smalltext2"><i>Nobu Matsuhisa</i></p>
-				<p class="smalltext"><a class="btn btn-primary" href="./restaurantlist">Find places <i class="icon icon-location"></i></a></p>
+			<img alt="" src="../sushi_error.jpg" />
+			<div class="centeredUp" style="text-align: center;">
+			<span class="bigtext">404</span>
+			<p class="smalltext">The requested resource could not be found</p>
 			</div>
-			
 		</div>
-		
 	</div>
-	
 	<div lang="en" th:replace="fragments/footer :: footer"> </div>
 </body>
 </html>
