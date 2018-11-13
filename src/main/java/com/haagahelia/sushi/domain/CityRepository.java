@@ -15,5 +15,6 @@ public interface CityRepository extends CrudRepository<City, Long> {
 	//CityRepository with a method
 	
 	List<City> findByName(String name);
+	
 
 }

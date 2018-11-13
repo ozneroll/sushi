@@ -15,5 +15,6 @@ public interface SushiRestaurantRepository extends CrudRepository<SushiRestauran
 	//sushi restaurant repo only method
 	
 	List<SushiRestaurant> findByName(String name);	
+	
 
 }

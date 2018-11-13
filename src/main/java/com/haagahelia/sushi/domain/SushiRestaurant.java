@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 @Entity
 public class SushiRestaurant {
@@ -41,6 +42,7 @@ public class SushiRestaurant {
 	@ManyToOne
 	@JsonIgnore
     @JoinColumn(name = "city")
+	@JsonValue	
     private City city;
 
 	public SushiRestaurant() {};
