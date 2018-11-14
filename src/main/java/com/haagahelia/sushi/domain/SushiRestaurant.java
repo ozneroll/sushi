@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 @Entity
@@ -27,8 +29,12 @@ public class SushiRestaurant {
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
+	
+	
 	private String name;
+	
 	private String description;
+	
 	private String latitude;
 	private String longitude;
 	private double overallRating;
@@ -42,7 +48,7 @@ public class SushiRestaurant {
 	@ManyToOne
 	@JsonIgnore
     @JoinColumn(name = "city")
-	@JsonValue	
+	@JsonProperty
     private City city;
 
 	public SushiRestaurant() {};
