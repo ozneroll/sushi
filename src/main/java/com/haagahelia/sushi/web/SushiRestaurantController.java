@@ -43,32 +43,37 @@ public class SushiRestaurantController {
 	@Autowired
 	private CityRepository crepository;
 	
-    @RequestMapping(value="/login")
+    @RequestMapping(value="/site/login")
     public String login() {	
         return "login";
     }	
 	
     //display list of restaurants
-	@RequestMapping("/restaurantlist")
+	@RequestMapping("/site/restaurantlist")
 	public String restaurantlist(Model model) {
 		model.addAttribute("restaurants", repository.findAll());
 		return "restaurantlist";
 	}
 	
 	//displays home page
-	@RequestMapping("/")
+	@RequestMapping("/site")
 	public String Home() {
 		return "home";
 	}
 	
+	@RequestMapping("/")
+	public String ToHome() {
+		return "redirect:site";
+	}
+	
 	//displays about page
-	@RequestMapping("/about")
+	@RequestMapping("/site/about")
 	public String About() {
 		return "about";
 	}
 	
 	//to add a new place
-	@RequestMapping(value = "/addrestaurant")
+	@RequestMapping(value = "/site/addrestaurant")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String addStudent(Model model){
 		model.addAttribute("restaurant", new SushiRestaurant());
@@ -101,7 +106,7 @@ public class SushiRestaurantController {
 	}
 	
 	//view the details
-	@RequestMapping(value = "/view/{id}")
+	@RequestMapping(value = "/site/view/{id}")
 	public String viewRestaurant(@PathVariable("id") Long restaurantId, Model model) {
 		
 		

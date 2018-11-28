@@ -1,6 +1,6 @@
 /**
 Project name: sushi
-File name: WebSecurityConfig.java
+File name: SecurityConfig.java
 Author: Lorenzo Lamberti
 Date of creation: 1 nov. 2018
 */
@@ -27,36 +27,59 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.haagahelia.sushi.web.UserDetailServiceImpl;
 
-@Order(2)
+@Order(1)
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
 	@Autowired
     private UserDetailServiceImpl userDetailsService;	
 	
-    @Override
+	@Override
     protected void configure(HttpSecurity http) throws Exception {
-    	
-    	http
-         .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when we are logged out        
-        .and()
-        .authorizeRequests().antMatchers("/site", "/site/**").authenticated()
-    	.and()
-      .formLogin()
-          .loginPage("/site/login")	//login page
-          .defaultSuccessUrl("/site")	//redirect here by default
-          .permitAll()
+     http
+     .csrf().disable()
+     .cors().and().authorizeRequests()
+     .and()
+		.antMatcher("/api/**")                               
+     .authorizeRequests()
+     .anyRequest()
+     .authenticated()
+     .and().authorizeRequests()
+      .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+          .anyRequest().authenticated()
           .and()
-      .logout()
-          .permitAll();
+          // Filter for the api/login requests
+          .addFilterBefore(new LoginFilter("/api/login",
+           authenticationManager()),
+                  UsernamePasswordAuthenticationFilter.class)
+          // Filter for other requests to check JWT in header
+          .addFilterBefore(new AuthenticationFilter(),
+                  UsernamePasswordAuthenticationFilter.class);
     }
     
-//    anonymous().anyRequest()
-//    .authorizeRequests()
-//    .anyRequest().authenticated()
-//    
+	
+	@Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        UrlBasedCorsConfigurationSource source = 
+            new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowedOrigins(Arrays.asList("*"));
+        config.setAllowedMethods(Arrays.asList("*"));
+        config.setAllowedHeaders(Arrays.asList("*"));
+        config.setAllowCredentials(true);
+        config.applyPermitDefaultValues();
+        
+        source.registerCorsConfiguration("/**", config);
+        return source;
+  } 
+	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+	    web.ignoring().antMatchers(HttpMethod.GET, "/api/**");
+	}
+    
     //password encryption
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
