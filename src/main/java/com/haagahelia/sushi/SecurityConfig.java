@@ -33,6 +33,8 @@ import com.haagahelia.sushi.web.UserDetailServiceImpl;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
+	//API Security config file
+	
 	@Autowired
     private UserDetailServiceImpl userDetailsService;	
 	
@@ -75,6 +77,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
   } 
 	
+	
+	//allow all to GET
 	@Override
 	public void configure(WebSecurity web) throws Exception {
 	    web.ignoring().antMatchers(HttpMethod.GET, "/api/**");
