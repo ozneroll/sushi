@@ -85,7 +85,7 @@ public class SushiRestaurantController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(SushiRestaurant restaurant){
 		repository.save(restaurant);
-		return "redirect:restaurantlist";
+		return "redirect:/site/restaurantlist";
 	}
 	
 	//method to delete
@@ -93,11 +93,11 @@ public class SushiRestaurantController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String deleteRestaurant(@PathVariable("id") Long restaurantId, Model model) {
 		repository.deleteById(restaurantId);
-		return "redirect:../restaurantlist";
+		return "redirect:../site/restaurantlist";
 	}
 	
 	//edit
-	@RequestMapping(value = "/edit/{id}")
+	@RequestMapping(value = "/site/edit/{id}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public String editRestaurant(@PathVariable("id") Long restaurantId, Model model) {
 		model.addAttribute("restaurant", repository.findById(restaurantId));
